@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  overflow-x: hidden;
+  background: #f4f7fc;
+  color: #0f172a;
+  -webkit-tap-highlight-color: transparent;
+  font-size: clamp(15px, 0.9rem + 0.2vw, 16px);
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border border-[#edf1f7] bg-white shadow-[0_2px_10px_rgba(15,23,42,0.04)];
+  }
+  .tab {
+    @apply min-h-[40px] flex-1 whitespace-nowrap rounded-xl px-3 text-sm font-semibold transition sm:flex-none sm:px-5;
+  }
+  .tab-on {
+    @apply bg-brand text-white shadow-[0_4px_12px_rgba(37,99,235,0.3)];
+  }
+  .tab-off {
+    @apply bg-white text-[#475569] border border-[#e5eaf2];
+  }
+  .btn-primary {
+    @apply flex min-h-[48px] items-center justify-center gap-2 rounded-xl bg-brand px-5 text-base font-semibold text-white shadow-[0_6px_16px_rgba(37,99,235,0.3)] transition active:scale-[0.98] disabled:opacity-50;
+  }
+  .btn-outline {
+    @apply flex min-h-[48px] items-center justify-center gap-2 rounded-xl border border-[#e2e8f0] bg-white px-5 text-base font-semibold text-[#0f172a] transition active:scale-[0.98] disabled:opacity-50;
+  }
+  .icon-btn {
+    @apply flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-[#0f172a] transition hover:bg-[#eef2f8] active:scale-95;
+  }
+  .input {
+    @apply min-h-[48px] w-full rounded-xl border border-[#e2e8f0] bg-white px-4 py-3 text-base outline-none transition placeholder:text-[#94a3b8] focus:border-brand focus:ring-2 focus:ring-brand/15;
+  }
+  .label {
+    @apply mb-1.5 block text-sm font-semibold text-[#0f172a];
+  }
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
