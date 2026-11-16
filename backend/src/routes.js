@@ -3,34 +3,11 @@ import bcrypt from 'bcryptjs';
 import { prisma, HttpError, isDay, isTime, toMinutes } from './db.js';
 import { signToken, publicUser, requireAuth, tooManyAttempts, recordFailure, clearFailures } from './auth.js';
 import { notify, runReminders } from './notify.js';
+import { CATEGORIES, COLORS, PRIORITIES, email, password, text } from './validate.js';
 
 export const api = Router();
 
 const wrap = (fn) => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
-
-const CATEGORIES = ['trabalho', 'design', 'geral', 'pesquisa', 'pessoal'];
-const PRIORITIES = ['low', 'medium', 'high'];
-const COLORS = ['blue', 'emerald', 'orange', 'violet', 'rose', 'amber'];
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-function text(v, field, { max = 200, required = false } = {}) {
-  const s = typeof v === 'string' ? v.trim() : '';
-  if (required && !s) throw new HttpError(400, `${field} é obrigatório`);
-  if (s.length > max) throw new HttpError(400, `${field} deve ter no máximo ${max} caracteres`);
-  return s;
-}
-
-function email(v) {
-  const s = text(v, 'E-mail', { max: 160, required: true }).toLowerCase();
-  if (!EMAIL_RE.test(s)) throw new HttpError(400, 'E-mail inválido');
-  return s;
-}
-
-function password(v) {
-  if (typeof v !== 'string' || v.length < 6) throw new HttpError(400, 'A senha deve ter pelo menos 6 caracteres');
-  if (v.length > 200) throw new HttpError(400, 'Senha muito longa');
-  return v;
-}
 
 const userSelect = { id: true, name: true, email: true };
 
