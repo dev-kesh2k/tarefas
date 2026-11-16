@@ -20,7 +20,7 @@ export function email(v) {
 }
 
 export function password(v) {
-  if (typeof v !== 'string' || v.length < 6) throw new HttpError(400, 'A senha deve ter pelo menos 6 caracteres');
+  if (typeof v !== 'string' || v.length < 8) throw new HttpError(400, 'A senha deve ter pelo menos 8 caracteres');
   if (v.length > 200) throw new HttpError(400, 'Senha muito longa');
   return v;
 }
