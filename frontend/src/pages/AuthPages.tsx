@@ -110,7 +110,7 @@ export function Register() {
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
-    if (password.length < 6) return setError('A senha deve ter pelo menos 6 caracteres');
+    if (password.length < 8) return setError('A senha deve ter pelo menos 8 caracteres');
     if (password !== confirm) return setError('As senhas não conferem');
     setBusy(true);
     setError('');
@@ -146,7 +146,7 @@ export function Register() {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-        <PasswordInput autoComplete="new-password" placeholder="Senha (mín. 6 caracteres)" value={password} onChange={(e) => setPassword(e.target.value)} required />
+        <PasswordInput autoComplete="new-password" placeholder="Senha (mín. 8 caracteres)" value={password} onChange={(e) => setPassword(e.target.value)} required />
         <PasswordInput autoComplete="new-password" placeholder="Confirmar senha" value={confirm} onChange={(e) => setConfirm(e.target.value)} required />
         <ErrorBox message={error} />
         <button className="btn-primary w-full" disabled={busy}>

@@ -42,7 +42,7 @@ export default function Account() {
 
   const savePassword = async (e: FormEvent) => {
     e.preventDefault();
-    if (password.length < 6) return setPmsg({ ok: '', err: 'A nova senha deve ter pelo menos 6 caracteres' });
+    if (password.length < 8) return setPmsg({ ok: '', err: 'A nova senha deve ter pelo menos 8 caracteres' });
     if (password !== confirm) return setPmsg({ ok: '', err: 'As senhas não conferem' });
     setPbusy(true);
     try {
